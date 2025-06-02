@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD QUIZ EXTRAVAGANZA! 🤪</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Fredoka+One&display=swap');
+        
+        :root {
+            --color1: #FF9E9E;
+            --color2: #FFD6A5;
+            --color3: #FFFFB5;
+            --color4: #CBFFA9;
+            --color5: #A0E4FF;
+            --color6: #D9A3FF;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, var(--color1), var(--color2), var(--color3), var(--color4), var(--color5), var(--color6));
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            border: 5px dashed #FF6B6B;
+            animation: bounceIn 1s;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #FF4081;
+            text-align: center;
+            font-size: clamp(2em, 5vw, 3em);
+            margin: 0;
+            text-shadow: 3px 3px 0 #FFF176;
+            animation: wiggle 2s infinite;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        .intro {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #FFF176;
+            border-radius: 15px;
+            border: 3px dotted #FF4081;
+            font-size: clamp(1em, 3vw, 1.2em);
+        }
+        
+        .question {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid var(--color5);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 600px) {
+            .question {
+                padding: 15px;
+                margin: 15px 0;
+            }
+        }
+        
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color1), var(--color2), var(--color3), var(--color4), var(--color5), var(--color6));
+        }
+        
+        .options label {
+            display: block;
+            margin: 15px 0;
+            padding: 15px;
+            background: #F8F9FA;
+            border-radius: 10px;
+            border: 2px solid #DEE2E6;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        @media (max-width: 600px) {
+            .options label {
+                padding: 12px;
+                margin: 10px 0;
+            }
+        }
+        
+        .options label:hover {
+            background: #E9F7FF;
+            transform: scale(1.02);
+        }
+        
+        .options label:active {
+            transform: scale(0.98);
+        }
+        
+        input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: #FF4081;
+        }
+        
+        @media (max-width: 600px) {
+            input[type="radio"] {
+                transform: scale(1.1);
+                margin-right: 10px;
+            }
+        }
+        
+        input[type="radio"]:checked + span {
+            font-weight: bold;
+            color: #FF4081;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #FF4081, #FF6B6B);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: clamp(1em, 3vw, 1.5em);
+            font-weight: bold;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+            font-family: 'Fredoka One', cursive;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        #result {
+            display: none;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s;
+            border: 5px solid #FFD166;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .emoji {
+            font-size: clamp(3em, 10vw, 5em);
+            margin: 20px 0;
+            animation: bounce 0.8s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: #E9ECEF;
+            border-radius: 10px;
+            margin: 30px 0;
+            height: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #FF9E9E, #FFD6A5, #FFFFB5, #CBFFA9, #A0E4FF, #D9A3FF);
+            background-size: 400% 100%;
+            animation: rainbow-bar 3s linear infinite;
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease-out;
+        }
+        
+        @keyframes rainbow-bar {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            top: 0;
+            animation: confetti 5s ease-in-out infinite;
+        }
+        
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .meme-gif {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 10px 15px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .twitter { background: #1DA1F2; }
+        .whatsapp { background: #25D366; }
+        .facebook { background: #4267B2; }
+        .copy { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ADHD QUIZ EXTRAVAGANZA! 🤪</h1>
+        
+        <div class="intro">
+            <p>🤪 Not a doctor, just fun! Answer honestly - no wrong answers! 🤪</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        
+        <div id="quiz">
+            <!-- Questions will be inserted here -->
+        </div>
+        
+        <button id="submit">SHOW ME MY BRAIN! 🧠</button>
+        
+        <div id="result" class="hidden">
+            <div class="emoji" id="result-emoji"></div>
+            <h2 id="result-title"></h2>
+            <p id="score-text"></p>
+            <img id="meme-gif" class="meme-gif" src="" alt="Meme reaction">
+            <p id="interpretation"></p>
+            <div id="detailed-feedback"></div>
+            
+            <div class="share-buttons">
+                <a href="#" class="share-btn twitter" id="twitter-share">
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="share-btn whatsapp" id="whatsapp-share">
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" class="share-btn facebook" id="facebook-share">
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="share-btn copy" id="copy-link">
+                    <span>Copy Link</span>
+                </a>
+            </div>
+            
+            <button onclick="window.location.reload()">TAKE AGAIN! 🔄</button>
+        </div>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="click-sound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
+    <audio id="lose-sound" src="https://www.soundjay.com/mechanical/sounds/boing-1.mp3" preload="auto"></audio>
+
+    <script>
+        // Full 20 questions
+        const questions = [
+            {
+                question: "1. How often do you start 5 things at once but finish 0? 🤯",
+                options: ["Never", "Rarely", "Sometimes", "Often", "ALWAYS HELP"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "2. Do you lose your phone while holding it? 📱",
+                options: ["Never", "Once", "Daily", "Hourly", "I lost it just now"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "3. When someone talks, do you already know what you'll say next? 🗣️",
+                options: ["Never", "Only if excited", "Sometimes", "Often", "I'm already 3 convos ahead"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "4. Sitting still feels like...? 🪑",
+                options: ["Easy", "A little hard", "Challenging", "Torture", "IM A HUMAN FIDGET SPINNER"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "5. Homework? More like... 📚",
+                options: ["No problem", "Mild dread", "I'll do it later", "Last minute panic", "What homework?"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "6. Your memory is like: 🧠",
+                options: ["Steel trap", "Mostly good", "Hit or miss", "Swiss cheese", "Goldfish mode"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "7. When bored, you: 😴",
+                options: ["Stay focused", "Get a little distracted", "Daydream", "Completely zone out", "Wait what were we talking about?"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "8. Following instructions: 📝",
+                options: ["Easy peasy", "Mostly okay", "Sometimes confusing", "Often hard", "Instructions? What instructions?"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "9. Impulse buys? 🛍️",
+                options: ["Never", "Rare treats", "Sometimes", "Often", "My wallet hates me"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "10. Waiting in line feels: 🚶‍♂️",
+                options: ["Fine", "A little annoying", "Hard", "Very hard", "I'D RATHER DIE"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "11. Your bedroom is: 🛏️",
+                options: ["Always clean", "Mostly tidy", "Somewhat messy", "Very messy", "Hoarders might be concerned"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "12. Time management? ⏰",
+                options: ["Excellent", "Pretty good", "Okay", "Poor", "What is time?"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "13. You interrupt people because: 💬",
+                options: ["Never", "Only if excited", "Sometimes", "Often", "MY BRAIN MOVES TOO FAST"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "14. Starting tasks is: 🏁",
+                options: ["Easy", "Mostly okay", "Sometimes hard", "Often hard", "IMPOSSIBLE WITHOUT DEADLINE PANIC"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "15. Noises distract you: 🔊",
+                options: ["Never", "Rarely", "Sometimes", "Often", "I CAN HEAR ELECTRICITY"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "16. Your energy is like: ⚡",
+                options: ["Steady", "Mostly steady", "Some ups and downs", "Big fluctuations", "TASMANIAN DEVIL MODE"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "17. Mistakes happen because: ❌",
+                options: ["Rarely", "Sometimes careless", "Often careless", "Very often", "MY BRAIN SKIPS STEPS"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "18. Relaxing means: 🧘",
+                options: ["Easy", "Mostly easy", "Sometimes hard", "Often hard", "RELAXING IS A MYTH"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "19. Patience level: 🧘‍♂️",
+                options: ["Very patient", "Mostly patient", "Okay", "Low", "ZERO PATIENCE ZERO"],
+                scores: [0, 1, 2, 3, 4]
+            },
+            {
+                question: "20. Your focus is like: 🔍",
+                options: ["Laser", "Mostly good", "Okay", "Short", "SQUIRREL!"],
+                scores: [0, 1, 2, 3, 4]
+            }
+        ];
+
+        // Quiz elements
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit');
+        const resultContainer = document.getElementById('result');
+        const scoreText = document.getElementById('score-text');
+        const interpretationText = document.getElementById('interpretation');
+        const detailedFeedback = document.getElementById('detailed-feedback');
+        const progressBar = document.getElementById('progress');
+        const resultEmoji = document.getElementById('result-emoji');
+        const resultTitle = document.getElementById('result-title');
+        const memeGif = document.getElementById('meme-gif');
+
+        // Sound elements
+        const clickSound = document.getElementById('click-sound');
+        const winSound = document.getElementById('win-sound');
+        const loseSound = document.getElementById('lose-sound');
+
+        // Meme GIFs for different results
+        const memeGifs = {
+            low: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3pyeW1xYWdiOXRoZmppdWkyazFtbTZtbTZqZ2M2amFscHp6d2x3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/E7TaZb8vDYTNm/giphy.gif",
+            medium: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZThwdXB3NXd6c3l6ZWEwbHBjbTRqaTh4bzM2MDQ0enA2MGd2NjdoNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ghhynvHS4NbDG/giphy.gif",
+            high: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3pyeW1xYWdiOXRoZmppdWkyazFtbTZtbTZqZ2M2amFscHp6d2x3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QCJtpCu4urlehQEZvg/giphy.gif"
+        };
+
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 7000);
+            }
+        }
+
+        // Display questions with fun animations
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.style.animationDelay = `${index * 0.1}s`;
+            questionDiv.innerHTML = `
+                <p><strong>${q.question}</strong></p>
+                <div class="options">
+                    ${q.options.map((option, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${q.scores[i]}">
+                            <span>${option}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            quizContainer.appendChild(questionDiv);
+            
+            // Animate in
+            setTimeout(() => {
+                questionDiv.style.animation = 'fadeIn 0.5s forwards';
+            }, index * 100);
+        });
+
+        // Play sound when selecting options
+        document.addEventListener('change', (e) => {
+            if (e.target.type === 'radio') {
+                // Play click sound
+                clickSound.currentTime = 0;
+                clickSound.play();
+                
+                // Bounce effect on selection
+                e.target.parentElement.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    e.target.parentElement.style.animation = '';
+                }, 500);
+                
+                // Update progress
+                const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+                const progress = (answered / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+        });
+
+        // Share functionality
+        function setupShareButtons(score) {
+            const shareText = `I scored ${score}/80 on the ADHD Quiz! 🤪 Try it yourself:`;
+            const shareUrl = window.location.href;
+            
+            document.getElementById('twitter-share').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('whatsapp-share').href = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+            document.getElementById('facebook-share').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            
+            document.getElementById('copy-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+                alert("Link copied to clipboard! 📋");
+            });
+        }
+
+        // Submit button
+        submitButton.addEventListener('click', () => {
+            const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+            
+            if (answered < questions.length) {
+                alert("Whoops! You missed some questions! 🤭");
+                loseSound.currentTime = 0;
+                loseSound.play();
+                return;
+            }
+
+            // Calculate score
+            let score = 0;
+            questions.forEach((_, index) => {
+                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+                score += parseInt(selectedOption.value);
+            });
+
+            // Show results
+            const maxScore = questions.length * 4;
+            scoreText.textContent = `YOUR ADHD SCORE: ${score}/80`;
+            
+            // Different result tiers
+            if (score <= 30) {
+                resultEmoji.textContent = "😎";
+                resultTitle.textContent = "FOCUS MASTER!";
+                interpretationText.innerHTML = "Your brain is like a laser beam! 🔦";
+                memeGif.src = memeGifs.low;
+                detailedFeedback.innerHTML = `
+                    <p>You might not have ADHD, but if you struggle sometimes:</p>
+                    <ul>
+                        <li>Try the Pomodoro technique</li>
+                        <li>Keep using planners if they help</li>
+                        <li>You're doing great! 👍</li>
+                    </ul>
+                `;
+                winSound.currentTime = 0;
+                winSound.play();
+            } 
+            else if (score <= 50) {
+                resultEmoji.textContent = "🤔";
+                resultTitle.textContent = "ADHD-LITE™";
+                interpretationText.innerHTML = "Some ADHD traits but nothing wild! 🎢";
+                memeGif.src = memeGifs.medium;
+                detailedFeedback.innerHTML = `
+                    <p>Tips that might help:</p>
+                    <ul>
+                        <li>Body doubling (work with a buddy)</li>
+                        <li>Fidget toys for focus</li>
+                        <li>Break tasks into micro-steps</li>
+                    </ul>
+                `;
+                createConfetti();
+                winSound.currentTime = 0;
+                winSound.play();
+            } 
+            else {
+                resultEmoji.textContent = "🤪";
+                resultTitle.textContent = "WELCOME TO ADHD LAND!";
+                interpretationText.innerHTML = "Your brain is a beautiful chaos machine! 🌪️";
+                memeGif.src = memeGifs.high;
+                detailedFeedback.innerHTML = `
+                    <p>Classic ADHD symptoms! Try:</p>
+                    <ul>
+                        <li>Noise-cancelling headphones</li>
+                        <li>Visual timers</li>
+                        <li>Professional evaluation if needed</li>
+                        <li>Embrace your awesome neurodivergent brain!</li>
+                    </ul>
+                `;
+                createConfetti();
+                winSound.currentTime = 0;
+                winSound.play();
+            }
+
+            // Setup share buttons
+            setupShareButtons(score);
+
+            // Show results
+            resultContainer.style.display = 'block';
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
