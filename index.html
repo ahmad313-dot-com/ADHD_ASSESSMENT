@@ -540,7 +540,7 @@
         // Share functionality
         function setupShareButtons(score) {
             const shareText = `I scored ${score}/80 on the ADHD Quiz! 🤪 Try it yourself:`;
-            const shareUrl = window.location.href;
+            const shareUrl = "https://ahmad313-dot-com.github.io/ADHD_ASSESSMENT/";
             
             document.getElementById('twitter-share').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
             document.getElementById('whatsapp-share').href = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
